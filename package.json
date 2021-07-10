@@ -1,0 +1,23 @@
+{
+  "name": "feature-lint",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm recursive run build --filter ./packages",
+    "build:ci": "CI=true pnpm run build",
+    "test": "pnpm recursive test --filter ./packages --no-bail",
+    "test:ci": "CI=true pnpm run test",
+    "publish-packages": "pnpm run build && changeset publish",
+    "version-packages": "changeset version && pnpm install --lockfile-only"
+  },
+  "author": "Renke Grunwald <renke@renke.org>",
+  "license": "ISC",
+  "devDependencies": {
+    "@changesets/cli": "^2.16.0",
+    "@types/node": "^15.12.2",
+    "jest": "^27.0.4",
+    "typescript": "4.3.2"
+  }
+}
