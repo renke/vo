@@ -29,11 +29,15 @@ export type UnvalueObject<VALUE_OBJECT extends ValueObject<any, any>> =
 
 export const vo = <NAME extends string, TYPE>(
   name: NAME,
-  value: TYPE,
-  valueObjectRegistry:
-    | ValueObjectRegistry
-    | undefined = GLOBAL_VALUE_OBJECT_REGISTRY
+  value: TYPE
 ): ValueObject<NAME, TYPE> => {
+  return value as ValueObject<NAME, TYPE>;
+};
+
+export const registerValueObject = (
+  name: string,
+  valueObjectRegistry: ValueObjectRegistry
+) => {
   if (valueObjectRegistry !== undefined) {
     if (valueObjectRegistry.has(name)) {
       throw new Error(
@@ -43,8 +47,6 @@ export const vo = <NAME extends string, TYPE>(
 
     valueObjectRegistry.add(name);
   }
-
-  return value as ValueObject<NAME, TYPE>;
 };
 
 export const createValueObject = vo;

@@ -1,6 +1,7 @@
 import {
   createValueObject,
   GLOBAL_VALUE_OBJECT_REGISTRY,
+  registerValueObject,
   ValueObject,
   ValueObjectRegistry,
 } from "@renke/vo";
@@ -18,22 +19,28 @@ export function v<
 >(
   name: NAME,
   type: ZodType<OUTPUT, ZOD_TYPE_DEF, INPUT>,
-  valueObjectRegistry: ValueObjectRegistry = GLOBAL_VALUE_OBJECT_REGISTRY
+  valueObjectRegistry:
+    | ValueObjectRegistry
+    | undefined = GLOBAL_VALUE_OBJECT_REGISTRY
 ) {
-  const ret = type.transform((value) => {
-    return createValueObject(name, value, valueObjectRegistry);
+  if (valueObjectRegistry !== undefined) {
+    registerValueObject(name, valueObjectRegistry);
+  }
+
+  const zodEffect = type.transform((value) => {
+    return createValueObject(name, value);
   });
 
   const extras: Extras<NAME, INPUT, OUTPUT> = {
     create: (value) => {
-      return ret.parse(value);
+      return zodEffect.parse(value);
     },
   };
 
   return {
-    ...ret,
+    ...zodEffect,
     ...extras,
-  } as typeof ret & typeof extras;
+  } as typeof zodEffect & typeof extras;
 }
 
 export const vod = v;
