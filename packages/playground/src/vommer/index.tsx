@@ -1,7 +1,5 @@
-import { GetVodTypeValueObject,, VodType } from "@renke/vod";
 import { vod, vommer } from "@renke/vommer";
 import { z } from "zod";
-import { useState, useEffect, useCallback } from "react";
 
 const Age = vod("Age", z.number().min(0));
 
@@ -36,10 +34,10 @@ const jane1 = vommer(UserWithProfile, joe, (old) => {
   old.first = "Jane";
 });
 
-const jane2 = UserWithProfile.change(joe, (old => {
+const jane2 = UserWithProfile.change(joe, (old) => {
   old.first = "Jane";
   old.profile.age = 2;
-}))
+});
 
 const janer = vommer(UserWithProfile, (joe) => {
   joe.first = "Jane";
