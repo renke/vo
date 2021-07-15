@@ -1,19 +1,21 @@
-export default {
+module.exports = {
   testEnvironment: "node",
 
-  extensionsToTreatAsEsm: [".ts"],
+  // extensionsToTreatAsEsm: [".ts"],
   testMatch: ["<rootDir>/src/**/*.test.ts"],
 
   preset: "ts-jest/presets/default-esm",
+  // preset: "ts-jest/presets/default",
 
   globals: {
     "ts-jest": {
-      useESM: true,
+      useESM: false,
+      // useESM: true
       // isolatedModules: true,
     },
   },
 
-  moduleNameMapper: {
-    "(.*)\\.js$": "$1",
-  },
+  // moduleNameMapper: {
+  //   "(.*)\\.js$": "$1",
+  // },
 };
