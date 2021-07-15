@@ -1,12 +1,15 @@
 import { z } from "zod";
-import { v } from "@renke/vod";
+import { vod } from "@renke/vod";
+import { UnvalueObject } from "@renke/vo";
 
-const User = v(
+const User = vod(
   "User",
   z.object({ first: z.string().min(1), last: z.string().min(1) })
 );
 
 type User = z.infer<typeof User>;
+
+type UnUser = UnvalueObject<User>;
 
 // NOT OKAY – Object might not be a valid User
 const user1: User = { first: "John", last: "Doe" };
@@ -20,15 +23,15 @@ user2.first = "Jane";
 // OKAY
 const user3: User = User.create({ ...user2, first: "Jane" });
 
-const Age = v("Age", z.number().min(0));
+const Age = vod("Age", z.number().min(0));
 
 type Age = z.infer<typeof Age>;
 
-const Profile = v("Profile", z.object({ age: Age, nick: z.string().min(1) }));
+const Profile = vod("Profile", z.object({ age: Age, nick: z.string().min(1) }));
 
 type Profile = z.infer<typeof Profile>;
 
-const UserWithProfile = v(
+const UserWithProfile = vod(
   "UserProfile",
   z.object({
     first: z.string().min(1),

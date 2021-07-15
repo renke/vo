@@ -1,29 +1,32 @@
 {
-  "name": "playground",
-  "private": true,
-  "version": "0.0.1",
+  "name": "@renke/vommer",
+  "version": "0.0.0",
   "scripts": {
-    "build": "tsc || true",
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --passWithNoTests",
+    "test:watch": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --watch",
+    "build": "tsc",
     "build:watch": "tsc --watch"
   },
   "author": "Renke Grunwald <renke@renke.org>",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "@types/node": "^15.12.2",
-    "@types/react": "^17.0.14",
+    "immer": "^9.0.5",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
     "typescript": "4.3.2",
     "zod": "^3.5.0"
   },
   "type": "module",
   "peerDependencies": {
+    "immer": "^9.0.5",
     "zod": "^3.5.0"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
     "@renke/vo": "workspace:^0.0.1",
-    "@renke/vod": "workspace:^0.0.1",
-    "@renke/vommer": "workspace:^0.0.0",
-    "react": "^17.0.2"
+    "@renke/vod": "workspace:^0.0.1"
   }
 }

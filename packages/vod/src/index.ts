@@ -1,28 +1,39 @@
 import {
   createValueObject,
-  GLOBAL_VALUE_OBJECT_REGISTRY,
   registerValueObject,
   ValueObject,
   ValueObjectRegistry,
 } from "@renke/vo";
-import { ZodType, ZodTypeDef } from "zod";
+import { z, ZodEffects, ZodType, ZodTypeDef } from "zod";
 
-export interface Extras<NAME extends string, INPUT, OUTPUT> {
-  create: (value: INPUT) => ValueObject<NAME, OUTPUT>;
+const VOD_VALUE_OBJECT = Symbol();
+
+export interface VodMethods<NAME extends string, TYPE> {
+  create: (value: TYPE) => ValueObject<NAME, TYPE>;
 }
 
-export function v<
+export type VodType<
   NAME extends string,
-  OUTPUT,
-  ZOD_TYPE_DEF extends ZodTypeDef = ZodTypeDef,
-  INPUT = OUTPUT
+  TYPE,
+  ZOD_TYPE_DEF extends ZodTypeDef = ZodTypeDef
+> = ZodEffects<ZodType<TYPE, ZOD_TYPE_DEF, TYPE>, ValueObject<NAME, TYPE>> & {
+  [VOD_VALUE_OBJECT]: ValueObject<NAME, TYPE>;
+} & VodMethods<NAME, TYPE>;
+
+export type GetVodTypeValueObject<VOD_EFFECTS extends VodType<any, any, any>> =
+  VOD_EFFECTS extends VodType<infer NAME, infer TYPE, infer ZOD_TYPE_DEF>
+    ? VOD_EFFECTS[typeof VOD_VALUE_OBJECT]
+    : never;
+
+export function vod<
+  NAME extends string,
+  TYPE,
+  ZOD_TYPE_DEF extends ZodTypeDef = ZodTypeDef
 >(
   name: NAME,
-  type: ZodType<OUTPUT, ZOD_TYPE_DEF, INPUT>,
-  valueObjectRegistry:
-    | ValueObjectRegistry
-    | undefined = GLOBAL_VALUE_OBJECT_REGISTRY
-) {
+  type: ZodType<TYPE, ZOD_TYPE_DEF, TYPE>,
+  valueObjectRegistry: ValueObjectRegistry | undefined = undefined
+): VodType<NAME, TYPE, ZOD_TYPE_DEF> {
   if (valueObjectRegistry !== undefined) {
     registerValueObject(name, valueObjectRegistry);
   }
@@ -31,18 +42,19 @@ export function v<
     return createValueObject(name, value);
   });
 
-  const extras: Extras<NAME, INPUT, OUTPUT> = {
+  const vodMethods: VodMethods<NAME, TYPE> = {
     create: (value) => {
       return zodEffect.parse(value);
     },
   };
 
-  return {
-    ...zodEffect,
-    ...extras,
-  } as typeof zodEffect & typeof extras;
+  return Object.assign(zodEffect, vodMethods) as VodType<
+    NAME,
+    TYPE,
+    ZOD_TYPE_DEF
+  >;
 }
 
-export const vod = v;
+export const v = vod;
 
-export default v;
+export default vod;

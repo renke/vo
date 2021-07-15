@@ -73,9 +73,6 @@ const number11 = NegativeNumber.create(-1);
 
 // NOT OKAY – number11 is not a PositiveNumber
 const number12: PositiveNumber = number11;
-
-// NOT OKAY – Fails at runtime because a value object with name PositiveNumber already exists
-const NaturalNumber = v("PositiveNumber", z.number().min(0));
 ```
 
 ## Complex Value Objects

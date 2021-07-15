@@ -1,8 +1,8 @@
-import { v } from "@renke/vod";
+import { vod } from "@renke/vod";
 import { createValueObject, UnvalueObject, ValueObject } from "@renke/vo";
 import { z } from "zod";
 
-const NaturalNumber = v("NaturalNumber", z.number().min(1));
+const NaturalNumber = vod("NaturalNumber", z.number().min(1));
 
 type NaturalNumber = z.infer<typeof NaturalNumber>;
 
@@ -37,7 +37,7 @@ add(natVo1, nat3);
 
 const natVo2 = add(natVo1, natVo1);
 
-const User = v(
+const User = vod(
   "User",
   z.object({ firstName: z.string().min(1), lastName: z.string().min(1) })
 );
@@ -54,15 +54,15 @@ const userVo3: User = User.parse({ ...userVo1, firstName: "Jane" });
 // fails because user is read-only
 userVo3.firstName = "Jane";
 
-const FirstName = v("FirstName", z.string().min(1));
+const FirstName = vod("FirstName", z.string().min(1));
 
 type FirstName = z.infer<typeof FirstName>;
 
-const LastName = v("LastName", z.string().min(1));
+const LastName = vod("LastName", z.string().min(1));
 
 type LastName = z.infer<typeof LastName>;
 
-const Person = v(
+const Person = vod(
   "Person",
   z.object({ firstName: FirstName, lastName: LastName })
 );
@@ -93,7 +93,7 @@ const person: Person = Person.create({
   lastName: "skdjf",
 });
 
-const Settings = v(
+const Settings = vod(
   "Settings",
   z.object({
     nested: z.object({
