@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { v } from "@renke/vod";
+import { vod } from "@renke/vod";
 
-const PositiveNumber = v("PositiveNumber", z.number().min(1));
+const PositiveNumber = vod("PositiveNumber", z.number().min(1));
 
 type PositiveNumber = z.infer<typeof PositiveNumber>;
 
@@ -43,7 +43,7 @@ PositiveNumber.create(number10);
 // OKAY – parse from zod allows unknown types
 PositiveNumber.parse(number10);
 
-const NegativeNumber = v("NegativeNumber", z.number().max(0));
+const NegativeNumber = vod("NegativeNumber", z.number().max(0));
 
 type NegativeNumber = z.infer<typeof NegativeNumber>;
 
@@ -54,4 +54,16 @@ const number11 = NegativeNumber.create(-1);
 const number12: PositiveNumber = number11;
 
 // NOT OKAY – Fails at runtime because a value object with name PositiveNumber already exists
-const NaturalNumber = v("PositiveNumber", z.number().min(0));
+const NaturalNumber = vod("PositiveNumber", z.number().min(0));
+
+// NOT OKAY – Changing type via transform is not allowed
+const NumberToString = vod(
+  "NumberToString",
+  z.number().transform((n) => `${n}`)
+);
+
+// OKAY – Changed value via transform is allowed
+const TrimmedString = vod(
+  "TrimmedString",
+  z.string().transform((n) => n.trim())
+);

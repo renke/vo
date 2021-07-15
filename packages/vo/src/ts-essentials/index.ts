@@ -1,4 +1,4 @@
-// See LICENSE and https://github.com/krzkaczor/ts-essentials/tree/d9034549ec1b3a72bf3f335fc54724349356dd7c
+// See LICENSE and https://github.com/krzkaczor/ts-essentials
 
 export type Primitive =
   | string

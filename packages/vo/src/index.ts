@@ -27,6 +27,16 @@ export type UnvalueObject<VALUE_OBJECT extends ValueObject<any, any>> =
     ? VALUE_OBJECT[typeof VALUE_OBJECT_TYPE]
     : never;
 
+export type GetValueObjectName<VALUE_OBJECT extends ValueObject<any, any>> =
+  VALUE_OBJECT extends ValueObject<any, infer TYPE>
+    ? VALUE_OBJECT[typeof VALUE_OBJECT_NAME]
+    : never;
+
+export type GetValueObjectType<VALUE_OBJECT extends ValueObject<any, any>> =
+  VALUE_OBJECT extends ValueObject<any, infer TYPE>
+    ? VALUE_OBJECT[typeof VALUE_OBJECT_TYPE]
+    : never;
+
 export const vo = <NAME extends string, TYPE>(
   name: NAME,
   value: TYPE
