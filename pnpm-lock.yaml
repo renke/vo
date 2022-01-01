@@ -16,9 +16,9 @@ importers:
 
   packages/playground:
     specifiers:
-      '@renke/vo': workspace:^0.0.2
-      '@renke/vod': workspace:^0.0.2
-      '@renke/vommer': workspace:^0.0.1
+      '@renke/vo': workspace:^0.1.0
+      '@renke/vod': workspace:^0.1.0
+      '@renke/vommer': workspace:^0.1.0
       '@types/node': ^15.12.2
       '@types/react': ^17.0.14
       react: ^17.0.2
@@ -53,7 +53,7 @@ importers:
 
   packages/vod:
     specifiers:
-      '@renke/vo': workspace:^0.0.2
+      '@renke/vo': workspace:^0.1.0
       '@types/jest': ^26.0.23
       '@types/node': ^15.12.2
       jest: ^27.0.4
@@ -72,8 +72,8 @@ importers:
 
   packages/vommer:
     specifiers:
-      '@renke/vo': workspace:^0.0.2
-      '@renke/vod': workspace:^0.0.2
+      '@renke/vo': workspace:^0.1.0
+      '@renke/vod': workspace:^0.1.0
       '@types/jest': ^26.0.23
       '@types/node': ^15.12.2
       immer: ^9.0.5

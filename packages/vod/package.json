@@ -1,6 +1,6 @@
 {
   "name": "@renke/vod",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "scripts": {
     "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --passWithNoTests",
     "test:watch": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --watch",
@@ -24,6 +24,6 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@renke/vo": "workspace:^0.0.2"
+    "@renke/vo": "workspace:^0.1.0"
   }
 }

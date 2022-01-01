@@ -1,5 +1,11 @@
 # @renke/vo
 
+## 0.1.0
+
+### Minor Changes
+
+- e85e39c: Fix a problem where wrong type was inferred
+
 ## 0.0.2
 
 ### Patch Changes
