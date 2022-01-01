@@ -9,6 +9,8 @@ const User = vod(
 
 type User = z.infer<typeof User>;
 
+type Number = UnvalueObject<string>;
+
 type UnUser = UnvalueObject<User>;
 
 // NOT OKAY – Object might not be a valid User
@@ -77,3 +79,14 @@ const userWithProfile3 = replaceProfile(userWithProfile2, profile1);
 
 // NOT OKAY – Object might not be a valid UserWithProfile
 const userWithProfile4: UserWithProfile = { ...userWithProfile3, last: "Jane" };
+
+const Profiles = vod("Profiles", z.array(Profile));
+
+type Profiles = z.infer<typeof Profiles>;
+
+const profiles = Profiles.create([
+  { nick: "a", age: 1 },
+  { nick: "b", age: 2 },
+]);
+
+const profilesArray: Profile[] = profiles;

@@ -1,4 +1,5 @@
-import { DeepReadonly } from "./ts-essentials/index.js";
+import { z } from "zod";
+import { Builtin, DeepReadonly } from "./ts-essentials/index.js";
 
 const VALUE_OBJECT_NAME = Symbol();
 
@@ -22,10 +23,16 @@ export type ValueObject<NAME extends string, TYPE> = ValueObjectType<TYPE> & {
 } & ValueObjectName<NAME> &
   ValidValueObject;
 
-export type UnvalueObject<VALUE_OBJECT extends ValueObject<any, any>> =
-  VALUE_OBJECT extends ValueObject<any, infer TYPE>
-    ? VALUE_OBJECT[typeof VALUE_OBJECT_TYPE]
-    : never;
+// TODO: This needs be reviewed and improved
+export type UnvalueObject<T> = T extends ValueObject<any, infer TYPE>
+  ? TYPE extends Builtin
+    ? TYPE
+    : TYPE extends {}
+    ? { [K in keyof TYPE]: UnvalueObject<TYPE[K]> }
+    : { [P in keyof TYPE]: UnvalueObject<[P]> }
+  : T extends {}
+  ? { [K in keyof T]: UnvalueObject<T[K]> }
+  : { [P in keyof T]: UnvalueObject<[P]> };
 
 export type GetValueObjectName<VALUE_OBJECT extends ValueObject<any, any>> =
   VALUE_OBJECT extends ValueObject<any, infer TYPE>

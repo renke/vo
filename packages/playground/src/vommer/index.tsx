@@ -32,6 +32,7 @@ const joe = UserWithProfile.create({
 
 const jane1 = vommer(UserWithProfile, joe, (old) => {
   old.first = "Jane";
+  old.profile.age = 2;
 });
 
 const jane2 = UserWithProfile.change(joe, (old) => {
@@ -41,6 +42,7 @@ const jane2 = UserWithProfile.change(joe, (old) => {
 
 const janer = vommer(UserWithProfile, (joe) => {
   joe.first = "Jane";
+  joe.profile.age = 2;
   joe.profile.nick = "ja18";
 });
 
