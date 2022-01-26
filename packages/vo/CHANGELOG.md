@@ -1,5 +1,11 @@
 # @renke/vo
 
+## 0.2.0
+
+### Minor Changes
+
+- 1dd6a8a: Update dependencies and also allow to use symbols as name (to allow value objects to be exposed by libraries without conflicts)
+
 ## 0.1.0
 
 ### Minor Changes
