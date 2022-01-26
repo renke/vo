@@ -1,12 +1,10 @@
-import {
-  GetValueObjectType,
-  UnvalueObject,
-  ValueObjectRegistry,
-} from "@renke/vo";
+import { GetValueObjectType, UnvalueObject } from "@renke/vo";
 import { GetVodTypeValueObject, vod as internalVod, VodType } from "@renke/vod";
 import { nothing, produce } from "immer";
 import { ZodType, ZodTypeDef } from "zod";
 import { DeepWritable } from "./ts-essentials/index.js";
+
+type StringOrSymbol = string | symbol;
 
 type RecipeReturnType<State> =
   | State
@@ -103,20 +101,22 @@ export interface VommerChangeMethod<VOD_TYPE extends VodType<any, any>> {
   ) => GetVodTypeValueObject<VOD_TYPE>;
 }
 
-export type VommerType<NAME extends string, TYPE> = VodType<NAME, TYPE> &
+export type VommerType<NAME extends StringOrSymbol, TYPE> = VodType<
+  NAME,
+  TYPE
+> &
   VommerMethods<VodType<NAME, TYPE>>;
 
 export function vod<
-  NAME extends string,
+  NAME extends StringOrSymbol,
   OUTPUT,
   INPUT,
   ZOD_TYPE_DEF extends ZodTypeDef = ZodTypeDef
 >(
   name: NAME,
-  type: ZodType<OUTPUT, ZOD_TYPE_DEF, INPUT>,
-  valueObjectRegistry: ValueObjectRegistry | undefined = undefined
+  type: ZodType<OUTPUT, ZOD_TYPE_DEF, INPUT>
 ): VommerType<NAME, OUTPUT> {
-  const vodType = internalVod(name, type, valueObjectRegistry);
+  const vodType = internalVod(name, type);
 
   const vommerMethods: VommerMethods<typeof vodType> = {
     change: ((valueObject: any, recipe?: any) =>

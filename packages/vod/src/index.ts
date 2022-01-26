@@ -1,19 +1,15 @@
-import {
-  createValueObject,
-  registerValueObject,
-  UnvalueObject,
-  ValueObject,
-  ValueObjectRegistry,
-} from "@renke/vo";
-import { z, ZodEffects, ZodType, ZodTypeDef } from "zod";
+import { createValueObject, UnvalueObject, ValueObject } from "@renke/vo";
+import { ZodEffects, ZodType, ZodTypeDef } from "zod";
+
+type StringOrSymbol = string | symbol;
 
 const VOD_VALUE_OBJECT = Symbol();
 
-export interface VodMethods<NAME extends string, TYPE> {
+export interface VodMethods<NAME extends StringOrSymbol, TYPE> {
   create: (value: UnvalueObject<TYPE>) => ValueObject<NAME, TYPE>;
 }
 
-export type VodType<NAME extends string, TYPE> = ZodEffects<
+export type VodType<NAME extends StringOrSymbol, TYPE> = ZodEffects<
   ZodType<ValueObject<NAME, TYPE>, ZodTypeDef, TYPE>,
   ValueObject<NAME, TYPE>
 > & {
@@ -27,15 +23,10 @@ export type GetVodTypeValueObject<VOD_EFFECTS> = VOD_EFFECTS extends VodType<
   ? VOD_EFFECTS[typeof VOD_VALUE_OBJECT]
   : never;
 
-export function vod<NAME extends string, OUTPUT, INPUT>(
+export function vod<NAME extends StringOrSymbol, OUTPUT, INPUT>(
   name: NAME,
-  type: ZodType<OUTPUT, ZodTypeDef, INPUT>,
-  valueObjectRegistry: ValueObjectRegistry | undefined = undefined
+  type: ZodType<OUTPUT, ZodTypeDef, INPUT>
 ): VodType<NAME, OUTPUT> {
-  if (valueObjectRegistry !== undefined) {
-    registerValueObject(name, valueObjectRegistry);
-  }
-
   const zodEffect = type.transform((value) => {
     return createValueObject(name, value);
   });
