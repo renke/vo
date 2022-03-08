@@ -1,9 +1,9 @@
 import { createValueObject, UnvalueObject, ValueObject } from "@renke/vo";
 import { ZodEffects, ZodType, ZodTypeDef } from "zod";
 
-type StringOrSymbol = string | symbol;
+export type StringOrSymbol = string | symbol;
 
-const VOD_VALUE_OBJECT = Symbol();
+export const VOD_VALUE_OBJECT = Symbol();
 
 export interface VodMethods<NAME extends StringOrSymbol, TYPE> {
   create: (value: UnvalueObject<TYPE>) => ValueObject<NAME, TYPE>;

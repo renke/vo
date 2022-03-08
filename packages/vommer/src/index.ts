@@ -4,9 +4,9 @@ import { nothing, produce } from "immer";
 import { ZodType, ZodTypeDef } from "zod";
 import { DeepWritable } from "./ts-essentials/index.js";
 
-type StringOrSymbol = string | symbol;
+export type StringOrSymbol = string | symbol;
 
-type RecipeReturnType<State> =
+export type RecipeReturnType<State> =
   | State
   | void
   | undefined

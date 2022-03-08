@@ -1,12 +1,12 @@
 import { Builtin, DeepReadonly } from "./ts-essentials/index.js";
 
-type StringOrSymbol = string | symbol;
+export type StringOrSymbol = string | symbol;
 
-const VALUE_OBJECT_NAME = Symbol();
+export const VALUE_OBJECT_NAME = Symbol();
 
-const VALUE_OBJECT_TYPE = Symbol();
+export const VALUE_OBJECT_TYPE = Symbol();
 
-class ValidValueObject {
+export class ValidValueObject {
   #validated = undefined;
 }
 
@@ -15,11 +15,11 @@ export type ValueObjectRegistry = Set<string>;
 export const GLOBAL_VALUE_OBJECT_REGISTRY: ValueObjectRegistry =
   new Set<string>();
 
-type ValueObjectName<NAME extends StringOrSymbol> = {
+export type ValueObjectName<NAME extends StringOrSymbol> = {
   [VALUE_OBJECT_NAME]: NAME;
 };
 
-type ValueObjectType<TYPE> = DeepReadonly<TYPE>;
+export type ValueObjectType<TYPE> = DeepReadonly<TYPE>;
 
 export type ValueObject<
   NAME extends StringOrSymbol,
