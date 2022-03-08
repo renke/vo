@@ -1,5 +1,16 @@
 # @renke/vommer
 
+## 1.0.0
+
+### Minor Changes
+
+- 633ea69: Use peer dependencies
+
+### Patch Changes
+
+- Updated dependencies [633ea69]
+  - @renke/vod@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes

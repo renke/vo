@@ -1,6 +1,6 @@
 {
   "name": "@renke/vod",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "scripts": {
     "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --passWithNoTests",
     "test:watch": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest --watch",
