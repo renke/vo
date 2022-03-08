@@ -1,5 +1,16 @@
 # @renke/vod
 
+## 0.4.0
+
+### Minor Changes
+
+- 673c722: Export stuff, revert peer dependency change
+
+### Patch Changes
+
+- Updated dependencies [673c722]
+  - @renke/vo@0.3.0
+
 ## 0.3.0
 
 ### Minor Changes

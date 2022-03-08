@@ -1,5 +1,11 @@
 # @renke/vo
 
+## 0.3.0
+
+### Minor Changes
+
+- 673c722: Export stuff, revert peer dependency change
+
 ## 0.2.0
 
 ### Minor Changes

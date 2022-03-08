@@ -1,5 +1,14 @@
 # playground
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [673c722]
+  - @renke/vo@0.3.0
+  - @renke/vod@0.4.0
+  - @renke/vommer@1.1.0
+
 ## 0.2.1
 
 ### Patch Changes
