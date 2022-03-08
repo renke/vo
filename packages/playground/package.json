@@ -1,7 +1,7 @@
 {
   "name": "playground",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "build": "tsc || true",
     "build:watch": "tsc --watch"
@@ -21,9 +21,9 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@renke/vo": "workspace:^0.2.0",
-    "@renke/vod": "workspace:^0.3.0",
-    "@renke/vommer": "workspace:^1.0.0",
+    "@renke/vo": "workspace:^0.3.0",
+    "@renke/vod": "workspace:^0.4.0",
+    "@renke/vommer": "workspace:^1.1.0",
     "react": "^17.0.2"
   }
 }
