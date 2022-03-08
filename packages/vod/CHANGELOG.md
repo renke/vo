@@ -1,5 +1,11 @@
 # @renke/vod
 
+## 0.3.0
+
+### Minor Changes
+
+- 633ea69: Use peer dependencies
+
 ## 0.2.0
 
 ### Minor Changes
